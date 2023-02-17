@@ -49,6 +49,10 @@ for i in range(len(arr)):
     new_arr[i].append((arr[i][0] - Min_x)/(Max_x - Min_x))
     new_arr[i].append((arr[i][1] - Min_y)/(Max_y - Min_y))
 #print(new_arr)
+#plotting the new normalised data points
+for i in new_arr:
+    plt.plot(i[0], i[1], color='blue',marker='o', markerfacecolor='blue', markersize=1)
+plt.show()
 #give_test_data gives us the two matrices from normalised data
 #the first matrix A is of all the x-data points after they have been put in the polynomial
 #the second matrix b is of all the y-data points from the normalised data set
@@ -70,6 +74,8 @@ def give_phi_matrix(A,b):
     phi_matrix = (np.matmul(np.matmul(np.linalg.inv(np.matmul(np.transpose(A),A)),np.transpose(A)),b))
     return(phi_matrix)
 #show_graph creates a graph of a given model(phi matrix) but this is only for polynomial type model
+#I have set M=2 as default because we need atleast a straight line with some slope as prediction, 
+#here M = 1 will mean just a line parallel to x-axis passing through a poin on y-axis
 def show_graph(phi_matrix,M = 2,color = "blue"):
     matrix = np.linspace(0,1000,500)
     for i in range(500):
@@ -92,6 +98,10 @@ for i in range(1,10):
     phi_matrix = give_phi_matrix(A,b)
     show_graph(phi_matrix,i,color_arr[i])
 plt.show()
+#from here you can see visually how when we are using a lower model complexity, we have underfitting problems
+#Similarly we have overfitting problems when we go to very high model complexities
+#high and low model complexities is a comment relative to the number of data points provided which is 10 in our case 
+
 #error_function takes your polynomial model, the normalised data set and gives out least square error
 def error_function(new_arr,phi_matrix,M):
     error = 0
@@ -114,6 +124,7 @@ for i in range(1,10):
     plt.plot(i, error, color='red',marker='2', markerfacecolor='blue', markersize=5)
     plt.legend([i])
 plt.show()
+#17-02-2023 
 #now we create a model in gaussian basis
 #muj_maker gives you a matrix of muj used in gaussian basis
 #here muj_matrix is created at random from a range
