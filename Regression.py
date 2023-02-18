@@ -186,6 +186,7 @@ def variance(arr):
         S += (i[0] - mean)**2
     return(S/(len(arr)-1))
 #we are choosing to create our muj matrix from the x-data points from the data set
+#works fine till here 18-02-2023
 muj_matrix = []
 for i in new_arr:
     muj_matrix.append(i[0])
